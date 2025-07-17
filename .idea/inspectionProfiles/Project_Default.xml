@@ -1,0 +1,62 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="16">
+            <item index="0" class="java.lang.String" itemvalue="@click" />
+            <item index="1" class="java.lang.String" itemvalue="v-for" />
+            <item index="2" class="java.lang.String" itemvalue="v-model" />
+            <item index="3" class="java.lang.String" itemvalue="@input" />
+            <item index="4" class="java.lang.String" itemvalue="@submit.prevent" />
+            <item index="5" class="java.lang.String" itemvalue="scoped" />
+            <item index="6" class="java.lang.String" itemvalue="v-if" />
+            <item index="7" class="java.lang.String" itemvalue="v-else" />
+            <item index="8" class="java.lang.String" itemvalue="@click.stop" />
+            <item index="9" class="java.lang.String" itemvalue=":key" />
+            <item index="10" class="java.lang.String" itemvalue=":value" />
+            <item index="11" class="java.lang.String" itemvalue="@change" />
+            <item index="12" class="java.lang.String" itemvalue=":class" />
+            <item index="13" class="java.lang.String" itemvalue=":rows" />
+            <item index="14" class="java.lang.String" itemvalue=":style" />
+            <item index="15" class="java.lang.String" itemvalue="v-else-if" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="23">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="PostForm" />
+            <item index="7" class="java.lang.String" itemvalue="PostList" />
+            <item index="8" class="java.lang.String" itemvalue="PostItem" />
+            <item index="9" class="java.lang.String" itemvalue="MyButton" />
+            <item index="10" class="java.lang.String" itemvalue="MyInput" />
+            <item index="11" class="java.lang.String" itemvalue="MyDialog" />
+            <item index="12" class="java.lang.String" itemvalue="router-view" />
+            <item index="13" class="java.lang.String" itemvalue="transition-group" />
+            <item index="14" class="java.lang.String" itemvalue="VacancyItem" />
+            <item index="15" class="java.lang.String" itemvalue="router-link" />
+            <item index="16" class="java.lang.String" itemvalue="MySelect" />
+            <item index="17" class="java.lang.String" itemvalue="VacancyForm" />
+            <item index="18" class="java.lang.String" itemvalue="VacancyList" />
+            <item index="19" class="java.lang.String" itemvalue="MyTextarea" />
+            <item index="20" class="java.lang.String" itemvalue="MyMultiSelect" />
+            <item index="21" class="java.lang.String" itemvalue="VacancyH1" />
+            <item index="22" class="java.lang.String" itemvalue="VacancyLoading" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+  </profile>
+</component>
