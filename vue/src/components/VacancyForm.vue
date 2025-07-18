@@ -19,7 +19,7 @@
     </div>
     <div class="buttons">
       <VacancyButton type="submit">Создать вакансию</VacancyButton>
-      <VacancyButton type="button" @click="$router.push('/')">Отмена</VacancyButton>
+      <VacancyButton type="button" class="cancel" @click="$router.push('/')">Отмена</VacancyButton>
     </div>
   </form>
 </template>
@@ -61,7 +61,10 @@ form, .field__wrapper {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 10px;
+}
+
+.cancel {
+  margin-left: 10px;
 }
 
 .error input, .error textarea {

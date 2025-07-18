@@ -1,6 +1,6 @@
 <template>
   <VacancyLoading v-if="isVacanciesLoading" />
-  <h2 v-else-if="!pagination.totalCount" style="color: red">Пока еще нет ни одной вакансии</h2>
+  <h2 v-else-if="Number(pagination.totalCount) === 0" style="color: red">Пока еще нет ни одной вакансии</h2>
   <div v-else>
     <div class="tools">
       <h3>Найдено вакансий: {{ pagination.totalCount }}</h3>

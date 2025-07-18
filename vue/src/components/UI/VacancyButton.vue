@@ -19,7 +19,6 @@ export default {
 <style scoped>
 
 .btn {
-  padding: 10px 15px;
   white-space: nowrap;
   cursor: pointer;
   border-radius: 5px;
@@ -29,10 +28,13 @@ export default {
 .big {
   width: 150px;
   margin-top: 15px;
+  padding: 10px 15px;
 }
 
 .small {
-  width: 100px;
+  width: 80px;
+  height: 30px;
+  padding: 5px 10px;
 }
 
 </style>
