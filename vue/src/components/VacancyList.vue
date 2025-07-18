@@ -63,7 +63,7 @@ export default {
       }
       this.vacancies = this.vacancies.filter(v => v.id !== vacancy.id);
       try {
-        const res = await axios.delete(baseUrl + '/site/delete/', {
+        const res = await axios.delete(baseUrl + '/vacancy/delete/', {
           params: {
             id: vacancy.id,
           }
@@ -87,7 +87,7 @@ export default {
     async fetchVacancies() {
       try {
         this.isVacanciesLoading = true;
-        const res = await axios.get(baseUrl + '/site/list', {
+        const res = await axios.get(baseUrl + '/vacancy/list', {
           params: {
             page: this.pagination.page,
             pageSize: this.pagination.pageSize,

@@ -22,7 +22,7 @@ export default {
         for (const key in vacancy) {
           formData.append(`Vacancy[${key}]`, vacancy[key])
         }
-        const res = await fetch(baseUrl + '/site/save', {
+        const res = await fetch(baseUrl + '/vacancy/save', {
           method: 'POST',
           body: formData,
         })

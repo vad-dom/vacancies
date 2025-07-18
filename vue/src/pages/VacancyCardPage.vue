@@ -64,7 +64,7 @@ export default {
     async fetchVacancy(id) {
       try {
         this.isVacancyLoading = true;
-        const res = await axios.get(baseUrl + '/site/card', {
+        const res = await axios.get(baseUrl + '/vacancy/card', {
           params: {
             id: id,
             fields: this.selectedFields.join(','),
