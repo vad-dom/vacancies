@@ -4,6 +4,7 @@ import VacancySelect from "@/components/UI/VacancySelect.vue";
 import VacancyTextArea from "@/components/UI/VacancyTextArea.vue";
 import VacancyHeader from "@/components/UI/VacancyHeader.vue";
 import VacancyLoading from "@/components/UI/VacancyLoading.vue";
+import VacancyPagination from "@/components/UI/VacancyPagination.vue";
 
 export default [
     VacancyButton,
@@ -12,4 +13,5 @@ export default [
     VacancyTextArea,
     VacancyHeader,
     VacancyLoading,
+    VacancyPagination,
 ]

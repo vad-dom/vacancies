@@ -9,27 +9,19 @@
         <VacancySelect v-model="selectedOrder" :options="orderOptions"/>
       </div>
     </div>
-    <div v-if="!isVacanciesLoading">
-      <transition-group name="vacancy-list">
-        <VacancyItem
-          :key="vacancy.id"
-          :vacancy="vacancy"
-          v-for="vacancy in vacancies"
-          @remove="removeVacancy"
-        />
-      </transition-group>
-      <div class="page__wrapper">
-        <button
-            v-for="page in pagination.pageCount"
-            :key="page"
-            :class="{'active': pagination.page === page}"
-            @click="changePage(page)"
-        >
-          {{ page }}
-        </button>
-      </div>
-    </div>
-    <VacancyLoading v-else />
+    <transition-group name="vacancy-list">
+      <VacancyItem
+        :key="vacancy.id"
+        :vacancy="vacancy"
+        v-for="vacancy in vacancies"
+        @remove="removeVacancy"
+      />
+    </transition-group>
+    <VacancyPagination
+      :page="pagination.page"
+      :pageCount="pagination.pageCount"
+      @update:page="changePage"
+    />
   </div>
 </template>
 
@@ -83,8 +75,6 @@ export default {
       this.pagination.page = page
     },
     async fetchVacancies() {
-      //const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
-      //return await res.json();
       try {
         this.isVacanciesLoading = true;
         const res = await axios.get(baseUrl + '/site/list', {
@@ -95,8 +85,6 @@ export default {
             order: this.selectedOrder
           }
         });
-        //this.totalPages = res.data.totalPages;
-        //this.totalRows = res.data.totalRows;
         console.log(res);
         this.vacancies = res.data.vacancies;
         this.pagination = res.data.pagination;
@@ -107,13 +95,12 @@ export default {
         this.isVacanciesLoading = false;
       }
     }
-
   },
   mounted() {
     this.fetchVacancies();
   },
   watch: {
-    page() {
+    'pagination.page'() {
       this.fetchVacancies();
     },
     selectedSort() {
@@ -124,9 +111,11 @@ export default {
     },
   },
   computed: {
+/*
     page() {
       return this.pagination.page
     },
+*/
 /*
     sortedVacancies() {
       return [...this.vacancies].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
@@ -155,28 +144,6 @@ h3 {
 .sort {
   display: flex;
   gap: 10px;
-}
-
-.page__wrapper {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.page__wrapper button {
-  //border: 1px solid black;
-  //padding: 10px;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.page__wrapper button.active {
-  //border: 2px solid teal;
-  background-color: #006400;
-  color: white;
 }
 
 .vacancy-list-item {
