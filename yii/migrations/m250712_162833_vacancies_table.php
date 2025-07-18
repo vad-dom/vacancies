@@ -14,7 +14,7 @@ class m250712_162833_vacancies_table extends Migration
             'title' => $this->string(100)->notNull()->comment('Название'),
             'short_details' => $this->string(200)->notNull()->comment('Краткое описание'),
             'full_details' => $this->text()->null()->comment('Полное описание'),
-            'salary' => $this->integer()->notNull()->comment('Зарплата'),
+            'salary' => $this->integer()->unsigned()->notNull()->comment('Зарплата'),
             'created_at' => $this
                 ->timestamp()
                 ->notNull()
