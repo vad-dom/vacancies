@@ -5,6 +5,7 @@ import VacancyTextArea from "@/components/UI/VacancyTextArea.vue";
 import VacancyHeader from "@/components/UI/VacancyHeader.vue";
 import VacancyLoading from "@/components/UI/VacancyLoading.vue";
 import VacancyPagination from "@/components/UI/VacancyPagination.vue";
+import VacancyFormattedSalary from "@/components/UI/VacancyFormattedSalary.vue";
 
 export default [
     VacancyButton,
@@ -14,4 +15,5 @@ export default [
     VacancyHeader,
     VacancyLoading,
     VacancyPagination,
+    VacancyFormattedSalary,
 ]

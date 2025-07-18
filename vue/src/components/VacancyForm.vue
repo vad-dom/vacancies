@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 export default {
   name: "VacancyForm",
   props: {
@@ -53,7 +52,6 @@ export default {
 </script>
 
 <style scoped>
-
 form, .field__wrapper {
   display: flex;
   flex-direction: column;
@@ -69,10 +67,10 @@ form, .field__wrapper {
 .error input, .error textarea {
   border: 2px solid red;
 }
+
 .error-text {
   color: red;
   font-size: 0.8em;
   margin-top: 4px;
 }
-
 </style>

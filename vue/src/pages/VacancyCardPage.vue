@@ -8,11 +8,7 @@
       <div>
         <div v-for="field in requiredFields" :key="field" class="field__options">
           <label>
-            <input
-              type="checkbox"
-              checked="checked"
-              disabled
-            />
+            <input type="checkbox" checked disabled/>
             {{ fieldLabels[field] || field }}
           </label>
         </div>
@@ -32,8 +28,7 @@
     <div v-if="!isVacancyLoading">
       <div class="vacancy">
         <h2>{{ vacancy.title }}</h2>
-        <h3 v-if="vacancy.salary > 0">{{ formatNumber(vacancy.salary) }} руб. в месяц</h3>
-        <h3 v-else>Зарплата не указана</h3>
+        <VacancyFormattedSalary :salary="Number(vacancy.salary) || 0" />
         <p class="formatted">{{ vacancy.short_details }}</p>
       </div>
       <p v-if="selectedOptions.includes('full_details') && !vacancy.full_details" class="empty">
@@ -47,7 +42,7 @@
 
 <script>
 import axios from "axios";
-import {baseUrl} from "@/config.js";
+import { baseUrl } from "@/config.js";
 
 export default {
   data() {
@@ -75,16 +70,17 @@ export default {
             fields: this.selectedFields.join(','),
           }
         });
-        console.log(res);
         this.vacancy = res.data;
       } catch (e) {
-        alert('Error')
+        if (e.response.status === 404) {
+          alert(e.response.data.message);
+          this.$router.push('/');
+        } else {
+          alert('Непредвиденная ошибка. Попробуйте еще раз')
+        }
       } finally {
         this.isVacancyLoading = false;
       }
-    },
-    formatNumber(n) {
-      return Number(n).toLocaleString('ru-RU');
     },
   },
   mounted() {
@@ -99,7 +95,6 @@ export default {
 </script>
 
 <style scoped>
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -134,5 +129,4 @@ export default {
   text-align: center;
   color: red;
 }
-
 </style>

@@ -14,7 +14,6 @@ export default {
     VacancyList
   },
 }
-
 </script>
 
 <style scoped>

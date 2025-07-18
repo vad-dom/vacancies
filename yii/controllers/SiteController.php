@@ -146,7 +146,10 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionList()
+    /**
+     * @return array
+     */
+    public function actionList(): array
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
@@ -158,33 +161,20 @@ class SiteController extends Controller
             $query->orderBy([$sort => $order === 'asc' ? SORT_ASC : SORT_DESC]);
         }
 
-        //$countQuery = clone $query;
-        //$totalRows = $countQuery->count();
-        /*
-        if (!$totalRows) {
-            throw new NotFoundHttpException('Ничего не найдено');
-        }
-        */
         $pagination = new Pagination([
             'totalCount' => $query->count(),
             'pageSizeLimit' => [1, 50],
             'defaultPageSize' => 10,
         ]);
-        /*
-        if ($pagination->offset > $totalRows) {
-            throw new NotFoundHttpException('Страница не найдена');
+        if ($pagination->getPage() > $pagination->getPageCount() - 1) {
+            $pagination->setPage($pagination->getPageCount() - 1);
         }
-        */
+
         $vacancies = $query
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-        /*
-        $headers = Yii::$app->response->headers;
-        $headers->add('Access-Control-Allow-Origin', '*');
-        $headers->add('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-        $headers->add('Access-Control-Allow-Headers', "Content-Type, Authorization, X-Requested-With");
-        */
+
         return [
             'vacancies' => $vacancies,
             'pagination' => [
@@ -208,12 +198,11 @@ class SiteController extends Controller
         $vacancy = Vacancy::find()
             ->select(explode(',', $fields))
             ->where(['id' => $id])
-            ->one()
-            ->toArray();
+            ->one();
         if (!$vacancy) {
             throw new NotFoundHttpException('Вакансия не найдена');
         }
-        return $vacancy;
+        return $vacancy->toArray();
     }
 
     /**
@@ -254,6 +243,6 @@ class SiteController extends Controller
         if ($vacancy->delete()) {
             return ['success' => true];
         }
-        return ['success' => false, 'error' => 'Не удалось удалить вакансию'];
+        return ['success' => false];
     }
 }

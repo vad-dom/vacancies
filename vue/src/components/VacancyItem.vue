@@ -2,11 +2,10 @@
   <div class="vacancy">
     <div>
       <h2>{{ vacancy.title }}</h2>
-      <h3 v-if="vacancy.salary > 0">{{ formatNumber(vacancy.salary) }} руб. в месяц</h3>
-      <h3 v-else>Зарплата не указана</h3>
+      <VacancyFormattedSalary :salary="Number(vacancy.salary) || 0" />
       <p class="formatted">{{ vacancy.short_details }}</p>
     </div>
-    <div class="vacancy__btns">
+    <div class="buttons">
       <VacancyButton :big="false" @click="$router.push(`/vacancy/${vacancy.id}`)">Открыть</VacancyButton>
       <VacancyButton :big="false" @click="$emit('remove', vacancy)">Удалить</VacancyButton>
     </div>
@@ -14,24 +13,17 @@
 </template>
 
 <script>
-
 export default {
   props: {
     vacancy: {
       type: Object,
       required: true
-    }
+    },
   },
-  methods: {
-    formatNumber(n) {
-      return Number(n).toLocaleString('ru-RU');
-    }
-  }
 }
 </script>
 
 <style scoped>
-
 .vacancy {
   margin-top: 15px;
   padding: 0 15px;
@@ -48,9 +40,8 @@ export default {
   white-space: pre-line;
 }
 
-.vacancy__btns {
+.buttons {
   display: flex;
   flex-direction: column;
 }
-
 </style>

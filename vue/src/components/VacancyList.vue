@@ -1,7 +1,7 @@
 <template>
   <VacancyLoading v-if="isVacanciesLoading" />
-  <h2 v-else-if="!vacancies.length" style="color: red">Пока еще нет ни одной вакансии</h2>
-  <div v-else="">
+  <h2 v-else-if="!pagination.totalCount" style="color: red">Пока еще нет ни одной вакансии</h2>
+  <div v-else>
     <div class="tools">
       <h3>Найдено вакансий: {{ pagination.totalCount }}</h3>
       <div class="sort">
@@ -42,7 +42,7 @@ export default {
         totalCount: 0,
         pageSize: 10,
         pageCount: 1,
-        page: 1
+        page: 1,
       },
       sortOptions: [
         {value: 'salary', name: 'По зарплате'},
@@ -58,21 +58,31 @@ export default {
   },
   methods: {
     async removeVacancy(vacancy) {
+      if (!confirm('Удалить вакансию?')) {
+        return;
+      }
       this.vacancies = this.vacancies.filter(v => v.id !== vacancy.id);
       try {
         const res = await axios.delete(baseUrl + '/site/delete/', {
           params: {
-            id: vacancy.id
+            id: vacancy.id,
           }
         });
-        console.log(res);
-        await this.fetchVacancies()
+        if (res.data.success === false) {
+          alert('Непредвиденная ошибка. Попробуйте еще раз');
+        }
       } catch (e) {
-        console.log(e);
+        if (e.response.status === 404) {
+          alert(e.response.data.message);
+        } else {
+          alert('Непредвиденная ошибка. Попробуйте еще раз');
+        }
+      } finally {
+        await this.fetchVacancies();
       }
     },
     changePage(page) {
-      this.pagination.page = page
+      this.pagination.page = page;
     },
     async fetchVacancies() {
       try {
@@ -82,15 +92,13 @@ export default {
             page: this.pagination.page,
             pageSize: this.pagination.pageSize,
             sort: this.selectedSort,
-            order: this.selectedOrder
+            order: this.selectedOrder,
           }
         });
-        console.log(res);
         this.vacancies = res.data.vacancies;
         this.pagination = res.data.pagination;
       } catch (e) {
-        console.log(e);
-        alert('Произошла ошибка при получении постов');
+        alert('Непредвиденная ошибка. Попробуйте еще раз');
       } finally {
         this.isVacanciesLoading = false;
       }
@@ -110,23 +118,10 @@ export default {
       this.fetchVacancies();
     },
   },
-  computed: {
-/*
-    page() {
-      return this.pagination.page
-    },
-*/
-/*
-    sortedVacancies() {
-      return [...this.vacancies].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
-    }
-*/
-  },
 }
 </script>
 
 <style scoped>
-
 .tools {
   margin-top: 20px;
   display: flex;
@@ -162,5 +157,4 @@ h3 {
 .vacancy-list-move {
   transition: transform 0.4s ease;
 }
-
 </style>
