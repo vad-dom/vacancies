@@ -22,12 +22,6 @@ export default {
         for (const key in vacancy) {
           FD.append(`Vacancy[${key}]`, vacancy[key])
         }
-/*
-        FD.append('Vacancy[title]', vacancy.title)
-        FD.append('Vacancy[salary]', vacancy.salary)
-        FD.append('Vacancy[short_details]', vacancy.short_details)
-        FD.append('Vacancy[full_details]', vacancy.full_details)
-*/
         const res = await fetch(baseUrl + '/site/save', {
           method: 'POST',
           body: FD,
@@ -37,7 +31,7 @@ export default {
         console.log(data)
         if (data.success) {
           this.errors = {}
-          this.$router.push(`/vacancies/${data.id}`);
+          this.$router.push(`/vacancy/${data.id}`);
         } else {
           this.errors = data.errors || {}
         }

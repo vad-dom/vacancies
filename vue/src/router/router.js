@@ -1,25 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VacanciesPage from "@/pages/VacanciesPage.vue";
-import Main from "@/pages/Main.vue";
-import VacancyCard from "@/pages/VacancyCard.vue";
-import VacancyInput from "@/pages/VacancyInput.vue";
+import VacancyListPage from "@/pages/VacancyListPage.vue";
+import VacancyCardPage from "@/pages/VacancyCardPage.vue";
+import VacancyFormPage from "@/pages/VacancyFormPage.vue";
 
 const routes = [
     {
         path: '/',
-        component: VacanciesPage
+        component: VacancyListPage,
     },
     {
-        path: '/about',
-        component: Main
+        path: '/vacancy/:id',
+        component: VacancyCardPage,
     },
     {
-        path: '/vacancies/:id',
-        component: VacancyCard
-    },
-    {
-        path: '/new',
-        component: VacancyInput
+        path: '/vacancy/new',
+        component: VacancyFormPage,
     }
 ]
 

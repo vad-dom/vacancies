@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MyTextArea",
+  name: "VacancyTextArea",
   props: {
     modelValue: [String, Number],
     rows: {

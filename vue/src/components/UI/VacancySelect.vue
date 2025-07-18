@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "MySelect",
+  name: "VacancySelect",
   props: {
     modelValue: {
       type: String

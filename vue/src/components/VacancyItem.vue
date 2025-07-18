@@ -7,8 +7,8 @@
       <p class="formatted">{{ vacancy.short_details }}</p>
     </div>
     <div class="vacancy__btns">
-      <MyButton :width="'100px'" @click="$router.push(`/vacancies/${vacancy.id}`)">Открыть</MyButton>
-      <MyButton :width="'100px'" @click="$emit('remove', vacancy)">Удалить</MyButton>
+      <VacancyButton :big="false" @click="$router.push(`/vacancy/${vacancy.id}`)">Открыть</VacancyButton>
+      <VacancyButton :big="false" @click="$emit('remove', vacancy)">Удалить</VacancyButton>
     </div>
   </div>
 </template>

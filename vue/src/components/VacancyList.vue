@@ -5,8 +5,8 @@
     <div class="tools">
       <h3>Найдено вакансий: {{ pagination.totalCount }}</h3>
       <div class="sort">
-        <MySelect v-model="selectedSort" :options="sortOptions" :disabledOption="true"/>
-        <MySelect v-model="selectedOrder" :options="orderOptions"/>
+        <VacancySelect v-model="selectedSort" :options="sortOptions" :disabledOption="true"/>
+        <VacancySelect v-model="selectedOrder" :options="orderOptions"/>
       </div>
     </div>
     <div v-if="!isVacanciesLoading">

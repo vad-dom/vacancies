@@ -1,16 +1,16 @@
 <template>
-  <button class="btn" :style="{width: width}">
+  <button class="btn" :class="big ? 'big' : 'small'">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: "MyButton",
+  name: "VacancyButton",
   props: {
-    width: {
-      type: String,
-      default: "150px"
+    big: {
+      type: Boolean,
+      default: true,
     }
   }
 }
@@ -24,6 +24,15 @@ export default {
   cursor: pointer;
   border-radius: 5px;
   box-shadow: #5c636a 0 0 5px;
+}
+
+.big {
+  width: 150px;
+  margin-top: 15px;
+}
+
+.small {
+  width: 100px;
 }
 
 </style>

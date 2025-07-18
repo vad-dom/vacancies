@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MyInput",
+  name: "VacancyInput",
   props: {
     modelValue: [String, Number]
   },
@@ -19,7 +19,6 @@ export default {
 <style scoped>
 
 .input {
-  //width: 100%;
   padding: 10px 15px;
   margin-top: 15px;
   border-radius: 5px;

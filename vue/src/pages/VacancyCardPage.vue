@@ -2,8 +2,8 @@
   <div>
     <div class="header">
       <div>
-        <MyButton @click="$router.push('/')">Список вакансий</MyButton>
-        <VacancyH1 :marginTop="'15px'">Вакансия</VacancyH1>
+        <VacancyHeader>Вакансия</VacancyHeader>
+        <VacancyButton @click="$router.push('/')">Список вакансий</VacancyButton>
       </div>
       <div>
         <div v-for="field in requiredFields" :key="field" class="field__options">
@@ -95,14 +95,6 @@ export default {
       return [...this.requiredFields, ...this.selectedOptions];
     }
   }
-/*
-  computed: {
-    selectedFields() {
-      const requiredFields = ['title', 'salary', 'short_details'];
-      return requiredFields.concat(this.selectedOptions.split(',')).filter(el => el !== '').join(',');
-    }
-  },
-*/
 }
 </script>
 
