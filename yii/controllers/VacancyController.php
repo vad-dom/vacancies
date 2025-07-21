@@ -10,9 +10,9 @@ use yii\db\Exception;
 use yii\db\Query;
 use yii\db\StaleObjectException;
 use yii\filters\Cors;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\rest\Controller;
 
 class VacancyController extends Controller
 {
@@ -21,17 +21,17 @@ class VacancyController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'corsFilter' => [
-                'class' => Cors::class,
-                'cors' => [
-                    'Origin' => ['*'],
-                    'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-                    'Access-Control-Request-Headers' => ['*'],
-                    'Access-Control-Max-Age' => 3600,
-                ],
+        $behaviors = parent::behaviors();
+        $behaviors['corsFilter'] = [
+            'class' => Cors::class,
+            'cors' => [
+                'Origin' => ['*'],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+                'Access-Control-Request-Headers' => ['*'],
+                'Access-Control-Max-Age' => 3600,
             ],
         ];
+        return $behaviors;
     }
 
     /**
@@ -132,5 +132,17 @@ class VacancyController extends Controller
             return ['success' => true];
         }
         return ['success' => false];
+    }
+
+    /**
+     * @return array
+     */
+    public function actionCsrf(): array
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return [
+            'param' => Yii::$app->request->csrfParam,
+            'token' => Yii::$app->request->getCsrfToken(),
+        ];
     }
 }

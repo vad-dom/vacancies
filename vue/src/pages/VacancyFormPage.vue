@@ -12,13 +12,27 @@ export default {
   },
   data() {
     return {
-      errors: {}
+      errors: {},
+      process: false,
     }
   },
   methods: {
     async addVacancy(vacancy) {
+      if (this.process) {
+        return;
+      }
+      this.process = true;
+      this.errors = {};
       try {
-        const formData = new FormData()
+        const csrfRes = await fetch(baseUrl + '/vacancy/csrf', {
+          method: 'GET',
+          headers: {
+            'Cache-Control': 'no-cache',
+          }
+        });
+        const { param, token } = await csrfRes.json();
+        const formData = new FormData();
+        formData.append(param, token);
         for (const key in vacancy) {
           formData.append(`Vacancy[${key}]`, vacancy[key])
         }
@@ -35,6 +49,8 @@ export default {
         }
       } catch (e) {
         alert('Непредвиденная ошибка. Попробуйте еще раз')
+      } finally {
+        this.process = false;
       }
     },
 

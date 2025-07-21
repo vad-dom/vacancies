@@ -68,14 +68,14 @@ export default {
             id: vacancy.id,
           }
         });
-        if (res.data.success === false) {
-          alert('Непредвиденная ошибка. Попробуйте еще раз');
+        if (!res.data.success) {
+          this.showGeneralError();
         }
       } catch (e) {
-        if (e.response.status === 404) {
+        if (e.response?.status === 404) {
           alert(e.response.data.message);
         } else {
-          alert('Непредвиденная ошибка. Попробуйте еще раз');
+          this.showGeneralError();
         }
       } finally {
         await this.fetchVacancies();
@@ -98,11 +98,15 @@ export default {
         this.vacancies = res.data.vacancies;
         this.pagination = res.data.pagination;
       } catch (e) {
-        alert('Непредвиденная ошибка. Попробуйте еще раз');
+        this.showGeneralError();
       } finally {
         this.isVacanciesLoading = false;
       }
-    }
+    },
+    showGeneralError() {
+      alert('Непредвиденная ошибка. Попробуйте еще раз');
+    },
+
   },
   mounted() {
     this.fetchVacancies();
