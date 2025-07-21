@@ -1,12 +1,19 @@
 <template>
-  <form @submit.prevent="addVacancy">
+  <form @submit.prevent="addVacancy" novalidate>
     <VacancyHeader>Создание вакансии</VacancyHeader>
     <div :class="{'error': errors.title}" class="field__wrapper">
       <VacancyInput v-model="vacancy.title" type="text" placeholder="Название" @input="errors.title = null" />
       <div v-if="errors.title" class="error-text">{{ errors.title[0] }}</div>
     </div>
     <div :class="{'error': errors.salary}" class="field__wrapper">
-      <VacancyInput v-model="vacancy.salary" type="number" placeholder="Зарплата" @input="errors.salary = null" />
+      <VacancyInput
+        v-model="vacancy.salary"
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        placeholder="Зарплата"
+        @input="errors.salary = null"
+      />
       <div v-if="errors.salary" class="error-text">{{ errors.salary[0] }}</div>
     </div>
     <div :class="{'error': errors.short_details}" class="field__wrapper">
